@@ -1,24 +1,22 @@
 const nameFocus = document.querySelector('input[type="text"]'); 
-const jobSelect = document.querySelector("#title"); 
-const jobOptions = document.querySelectorAll('option[value]');
-const jobOtherOption = document.querySelector('option[value="other"]'); 
+const jobOptions = document.querySelector('#other-job-role');
+const otherOption = document.querySelector('option[value="other"]'); 
+const jobSelect = document.querySelector('#title'); 
 
 
 window.onload = function focusOnName() {
     nameFocus.focus(); 
 };
 
-jobSelect.addEventListener("change", (e) => {
-    for (let i = 0; i < jobSelect.length; i++) {
 
-        if (e.target.value !== jobOtherOption) {
-            jobOtherOption[i].hidden = true; 
-            jobOtherOption[i].diabled = true; 
+jobOptions.hidden = true; 
+
+jobSelect.addEventListener('change', (e) => {
+
+        if (e.target.value === 'other') {
+            jobOptions.hidden = false; 
+            jobOptions.diabled = false; 
         } else {
-        jobOtherOption[i].hidden = false; 
-        jobOtherOption[i].diabled = false;
+        jobOptions.diabled = true;
     }
-}   if (jobOptions.value !== "") {
-    jobOptions.value = "reselect"
-}
 });
