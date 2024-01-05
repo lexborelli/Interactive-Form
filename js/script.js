@@ -53,18 +53,14 @@ const checkedCost = document.querySelectorAll('#activities input[type="checkbox"
 activities.addEventListener('change', (e) => {
     let price = 0;
     checkedActivity = e.target;
-    checkedActivityPrice = checkedActivity.getAttribute("data-cost");
-
 
     for (let i = 0; i < checkedCost.length; i++) {
 
-        if (checkedActivity !== checkedCost[i].checked) {
-           price += checkedActivityPrice;
-           console.log(`Total: $${checkedActivityPrice}`);
+        if (checkedCost[i].checked) {
+           price += parseInt(checkedCost[i].getAttribute('data-cost'));
         }
-        else {
-           price -= checkedActivityPrice; 
+     
         }
-        totalCost.innerHTML = `Total: $${checkedActivityPrice}`; 
-    }
+        totalCost.innerHTML = `Total: $${price}`; 
+    
 }); 
