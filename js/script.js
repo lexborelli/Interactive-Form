@@ -83,9 +83,14 @@ payment.addEventListener("change", (e) => {
             bitcoinDiv.hidden = true; 
             creditCardDiv.hidden = true; 
         }
-        else if (e.target.value === 'bitcoin') {
+        if (e.target.value === 'bitcoin') {
             paypalDiv.hidden = true; 
             bitcoinDiv.hidden = false; 
             creditCardDiv.hidden = true; 
+        }
+        else if (e.target.value === 'credit-card') {
+            paypalDiv.hidden = true; 
+            bitcoinDiv.hidden = true; 
+            creditCardDiv.hidden = false; 
         }
     });
