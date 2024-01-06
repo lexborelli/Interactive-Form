@@ -4,11 +4,18 @@ const jobSelect = document.querySelector('#title');
 const shirtColor = document.querySelector('#shirt-colors'); 
 const colorSelect = document.querySelectorAll('option[data-theme]');
 const design = document.querySelector('#design'); 
-
+const activities = document.querySelector('#activities');
+const totalCost = document.querySelector('#activities-cost');
+const checkedCost = document.querySelectorAll('#activities input[type="checkbox"]');
+const payment = document.querySelector('#payment'); 
+const creditCard = document.querySelector('option[value="credit-card"]');
+const paypalDiv = document.querySelector("#paypal"); 
+const bitcoinDiv = document.querySelector("#bitcoin"); 
+const creditCardDiv = document.querySelector('#credit-card');
 
 /*When the page first loads, the first text field should have the focus state by default to prompt the user. Used focus on the name input.*/
 
-window.onload = function focusOnName() {
+window.onload = function load() {
     nameFocus.focus(); 
 };
 
@@ -45,9 +52,6 @@ jobSelect.addEventListener('change', (e) => {
 });
 
 /*Activities */
-const activities = document.querySelector('#activities');
-const totalCost = document.querySelector('#activities-cost');
-const checkedCost = document.querySelectorAll('#activities input[type="checkbox"]');
 
 
 activities.addEventListener('change', (e) => {
@@ -64,3 +68,24 @@ activities.addEventListener('change', (e) => {
         totalCost.innerHTML = `Total: $${price}`; 
     
 }); 
+
+/* Payment info Section*/
+
+
+creditCard.selected = true;  
+paypalDiv.hidden = true; 
+bitcoinDiv.hidden = true; 
+
+payment.addEventListener("change", (e) => {
+       
+        if (e.target.value === 'paypal') {
+            paypalDiv.hidden = false; 
+            bitcoinDiv.hidden = true; 
+            creditCardDiv.hidden = true; 
+        }
+        else if (e.target.value === 'bitcoin') {
+            paypalDiv.hidden = true; 
+            bitcoinDiv.hidden = false; 
+            creditCardDiv.hidden = true; 
+        }
+    });
