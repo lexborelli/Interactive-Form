@@ -1,4 +1,4 @@
-const nameFocus = document.querySelector('input[type="text"]'); 
+const nameInput = document.querySelector('input[type="text"]'); 
 const jobOptions = document.querySelector('#other-job-role');
 const jobSelect = document.querySelector('#title'); 
 const shirtColor = document.querySelector('#shirt-colors'); 
@@ -16,7 +16,7 @@ const creditCardDiv = document.querySelector('#credit-card');
 /*When the page first loads, the first text field should have the focus state by default to prompt the user. Used focus on the name input.*/
 
 window.onload = function load() {
-    nameFocus.focus(); 
+    nameInput.focus(); 
 };
 
 /* JOB ROLE -- first, I hid the "other job role" text input until "other" is selected in the drop down menu. Then, I created an eventlistener to listen for clicks on the drop down menu. If "other" is clicked then the text input will become visible and enabled to allow the user to input other job roles. if not, then the text input under the drop down menu is diabled and not visible.*/
@@ -93,4 +93,36 @@ payment.addEventListener("change", (e) => {
             bitcoinDiv.hidden = true; 
             creditCardDiv.hidden = false; 
         }
+    });
+
+    /*form validation*/
+
+    const emailInput = document.querySelector('input[type="email"]');
+    const ccNumber = document.querySelector('input[id="cc-num"]');
+    const zipCode = document.querySelector('input[id="zip"]');
+    const cvv = document.querySelector('input[id="cvv"]');
+    
+    document.querySelector('form').addEventListener('submit', (e) => {
+        const isValidUsername = () => /^[a-z]+$/.test(nameInput.value); 
+        const isValidEmail = () => /^[^@] + @ [^@.]+\.[a-z]+$/i.test(emailInput.value); 
+
+        //name validator 
+
+        if (isValidUsername()) {
+            nameInput.closest('label').className = 'valid';
+           } else {
+            e.preventDefault();
+            nameInput.closest('label').className = 'error-border';
+            nameInput.nextElementSibling.style.display = 'block'; 
+           } 
+
+           //email validator 
+           if (isValidEmail()) {
+            emailInput.closest('label').className = 'valid'; 
+           } else {
+            e.preventDefault();
+            emailInput.closest('label').className = 'error-border'; 
+            emailInput.nextElementSibling.style.display = 'block'; 
+        }
+
     });
