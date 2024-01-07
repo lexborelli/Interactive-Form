@@ -106,6 +106,8 @@ payment.addEventListener("change", (e) => {
         const isValidUsername = () => /^[a-z]+$/.test(nameInput.value); 
         const isValidEmail = () => /^[^@] + @ [^@.]+\.[a-z]+$/i.test(emailInput.value); 
         const isValidccNumber = () => /^4[0-9]{12}(?:[0-9]{3})?$/.test(ccNumber.value); 
+        const isValidCvv = () => /^[0-9]{3,4}$/.test(cvv.value); 
+        const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
         //name validator 
 
         if (isValidUsername()) {
@@ -131,6 +133,23 @@ payment.addEventListener("change", (e) => {
             ccNumber.closest('label').className = 'error-border'; 
             ccNumber.nextElementSibling.style.display = 'block'; 
         }
+        //cvv validator 
+        if (isValidCvv()) {
+            cvv.closest('label').className = 'valid';
+        } else {
+            cvv.closest('label').className = 'error-border'; 
+            cvv.nextElementSibling.style.display = 'block'; 
+        }
+
+        //zipcode validator
+        if (isValidZipCode()) {
+            zipCode.closest('label').className = 'valid'; 
+        } else {
+            zipCode.closest('label').className = 'error-border'; 
+            zipCode.nextElementSibling.style.display = 'block'; 
+        }
+
+
         //activities validator 
-     
+        
     });
