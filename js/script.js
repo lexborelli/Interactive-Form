@@ -105,7 +105,7 @@ payment.addEventListener("change", (e) => {
     document.querySelector('form').addEventListener('submit', (e) => {
         const isValidUsername = () => /^[a-z]+$/.test(nameInput.value); 
         const isValidEmail = () => /^[^@] + @ [^@.]+\.[a-z]+$/i.test(emailInput.value); 
-
+        const isValidccNumber = () => /^4[0-9]{12}(?:[0-9]{3})?$/.test(ccNumber.value); 
         //name validator 
 
         if (isValidUsername()) {
@@ -124,5 +124,13 @@ payment.addEventListener("change", (e) => {
             emailInput.closest('label').className = 'error-border'; 
             emailInput.nextElementSibling.style.display = 'block'; 
         }
-
+        //card number validator 
+        if (isValidccNumber()) {
+            ccNumber.closest('label').className = 'valid'; 
+        } else {
+            ccNumber.closest('label').className = 'error-border'; 
+            ccNumber.nextElementSibling.style.display = 'block'; 
+        }
+        //activities validator 
+     
     });
