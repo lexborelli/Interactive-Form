@@ -12,6 +12,7 @@ const creditCard = document.querySelector('option[value="credit-card"]');
 const paypalDiv = document.querySelector("#paypal"); 
 const bitcoinDiv = document.querySelector("#bitcoin"); 
 const creditCardDiv = document.querySelector('#credit-card');
+const activitiesBox = document.querySelector('#activities-box'); 
 
 /*When the page first loads, the first text field should have the focus state by default to prompt the user. Used focus on the name input.*/
 
@@ -52,10 +53,10 @@ jobSelect.addEventListener('change', (e) => {
 });
 
 /*Activities */
-
+let price = 0;
 
 activities.addEventListener('change', (e) => {
-    let price = 0;
+    
     checkedActivity = e.target;
 
     for (let i = 0; i < checkedCost.length; i++) {
@@ -108,6 +109,7 @@ payment.addEventListener("change", (e) => {
         const isValidccNumber = () => /^4[0-9]{12}(?:[0-9]{3})?$/.test(ccNumber.value); 
         const isValidCvv = () => /^[0-9]{3,4}$/.test(cvv.value); 
         const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
+        const isValidActivity = () => checkedCost.checked === 0; 
         //name validator 
 
         if (isValidUsername()) {
@@ -122,7 +124,6 @@ payment.addEventListener("change", (e) => {
            if (isValidEmail()) {
             emailInput.closest('label').className = 'valid'; 
            } else {
-            e.preventDefault();
             emailInput.closest('label').className = 'error-border'; 
             emailInput.nextElementSibling.style.display = 'block'; 
         }
@@ -149,7 +150,12 @@ payment.addEventListener("change", (e) => {
             zipCode.nextElementSibling.style.display = 'block'; 
         }
 
-
         //activities validator 
+        if (checkedCost.checked !== 0) {
+            alert("please select at least one activity!");
+            activitiesBox.nextElementSibling.style.display = 'block';
+         } else {
+            activities.closest('div').classList.add = 'valid'; 
+            }
         
-    });
+    });  
