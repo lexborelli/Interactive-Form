@@ -107,8 +107,7 @@ payment.addEventListener("change", (e) => {
         const isValidccNumber = () => /^4[0-9]{12}(?:[0-9]{3})?$/.test(ccNumber.value); 
         const isValidCvv = () => /^[0-9]{3,4}$/.test(cvv.value); 
         const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
-        const isValidActivity = () => price > 0; 
-        
+        e.preventDefault();
         //name validator 
 
         if (isValidUsername()) {
@@ -149,14 +148,16 @@ payment.addEventListener("change", (e) => {
         }
 
         //activities validator
-        for (let i = 0; i < checkedCost.length; i++) {
 
-        if (checkedCost[i].checked <= 1) {
-            activities.lastChild.className.add = 'valid'; 
+      
+        for (let i = 0; i < checkedCost.length; i++) {
+            
+        if (checkedCost[i].checked) {
+            activities.lastElementChild.classList.add = 'valid'; 
          } else {
             activities.lastChild.className = 'activities-hint'; 
             activities.lastElementChild.style.display = 'block';
             }
         }
-        e.preventDefault();
+    
     });  
