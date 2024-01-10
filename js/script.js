@@ -6,7 +6,7 @@ const colorSelect = document.querySelectorAll('option[data-theme]');
 const design = document.querySelector('#design'); 
 const activities = document.querySelector('#activities');
 const totalCost = document.querySelector('#activities-cost');
-const checkedCost = document.querySelectorAll('#activities input[type="checkbox"]');
+const checkedCost = document.querySelectorAll('input[type="checkbox"]');
 const payment = document.querySelector('#payment'); 
 const creditCard = document.querySelector('option[value="credit-card"]');
 const paypalDiv = document.querySelector("#paypal"); 
@@ -55,7 +55,6 @@ jobSelect.addEventListener('change', (e) => {
 let price = 0;
 
 activities.addEventListener('change', (e) => {
-    
     checkedActivity = e.target;
 
     for (let i = 0; i < checkedCost.length; i++) {
@@ -108,52 +107,56 @@ payment.addEventListener("change", (e) => {
         const isValidccNumber = () => /^4[0-9]{12}(?:[0-9]{3})?$/.test(ccNumber.value); 
         const isValidCvv = () => /^[0-9]{3,4}$/.test(cvv.value); 
         const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
+        const isValidActivity = () => price > 0; 
+        
         //name validator 
 
         if (isValidUsername()) {
-            nameInput.closest('label').className = 'valid';
+            nameInput.closest('label').nextElementSibling.className.add = 'valid';
            } else {
-            e.preventDefault();
-            nameInput.closest('label').className = 'error-border';
+            nameInput.closest('label').className = 'name-hint';
             nameInput.nextElementSibling.style.display = 'block'; 
            } 
 
            //email validator 
            if (isValidEmail()) {
-            emailInput.closest('label').className = 'valid'; 
+            emailInput.closest('label').className.add = 'valid'; 
            } else {
-            emailInput.closest('label').className = 'error-border'; 
+            emailInput.closest('label').className = 'email-hint'; 
             emailInput.nextElementSibling.style.display = 'block'; 
         }
         //card number validator 
         if (isValidccNumber()) {
-            ccNumber.closest('label').className = 'valid'; 
+            ccNumber.closest('label').className.add = 'valid'; 
         } else {
-            ccNumber.closest('label').className = 'error-border'; 
+            ccNumber.closest('label').className = '"cc-hint'; 
             ccNumber.nextElementSibling.style.display = 'block'; 
         }
         //cvv validator 
         if (isValidCvv()) {
-            cvv.closest('label').className = 'valid';
+            cvv.closest('label').className.add = 'valid';
         } else {
-            cvv.closest('label').className = 'error-border'; 
+            cvv.closest('label').className = 'cvv-hint'; 
             cvv.nextElementSibling.style.display = 'block'; 
         }
 
         //zipcode validator
         if (isValidZipCode()) {
-            zipCode.closest('label').className = 'valid'; 
+            zipCode.closest('label').className.add = 'valid'; 
         } else {
-            zipCode.closest('label').className = 'error-border'; 
+            zipCode.closest('label').className = 'zip-hint'; 
             zipCode.nextElementSibling.style.display = 'block'; 
         }
 
-        //activities validator 
-        if (checkedCost.checked !== 0) {
+        //activities validator
+        for (let i = 0; i < checkedCost.length; i++) {
+
+        if (checkedCost[i].checked <= 1) {
+            activities.lastChild.className.add = 'valid'; 
+         } else {
             activities.lastChild.className = 'activities-hint'; 
             activities.lastElementChild.style.display = 'block';
-         } else {
-            activities.lastChild.className = 'valid'; 
             }
-        
+        }
+        e.preventDefault();
     });  
