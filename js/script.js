@@ -111,7 +111,7 @@ payment.addEventListener("change", (e) => {
         //name validator 
 
         if (isValidUsername()) {
-            nameInput.closest('label').nextElementSibling.className.add = 'valid';
+            nameInput.closest('label').nextElementSibling.classList.add = 'valid';
            } else {
             nameInput.closest('label').className = 'name-hint';
             nameInput.nextElementSibling.style.display = 'block'; 
@@ -126,9 +126,9 @@ payment.addEventListener("change", (e) => {
         }
         //card number validator 
         if (isValidccNumber()) {
-            ccNumber.closest('label').className.add = 'valid'; 
+            ccNumber.closest('label').className.replace = 'valid'; 
         } else {
-            ccNumber.closest('label').className = '"cc-hint'; 
+            ccNumber.closest('label').className = 'cc-hint'; 
             ccNumber.nextElementSibling.style.display = 'block'; 
         }
         //cvv validator 
@@ -150,14 +150,14 @@ payment.addEventListener("change", (e) => {
         //activities validator
 
       
-        for (let i = 0; i < checkedCost.length; i++) {
-            
-        if (checkedCost[i].checked) {
-            activities.lastElementChild.classList.add = 'valid'; 
+        if (totalCost !== 0) {
+            activities.lastElementChild.classList.add('valid'); 
+            activities.lastElementChild.style.display = 'none'; 
          } else {
-            activities.lastChild.className = 'activities-hint'; 
+            activities.lastChild.className = 'activities-hint';
+            activities.lastElementChild.classList.add('not-valid'); 
             activities.lastElementChild.style.display = 'block';
             }
-        }
+        
     
     });  
