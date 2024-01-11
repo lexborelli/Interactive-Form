@@ -56,17 +56,29 @@ let price = 0;
 
 activities.addEventListener('change', (e) => {
     checkedActivity = e.target;
+    let price = 0;
 
     for (let i = 0; i < checkedCost.length; i++) {
 
         if (checkedCost[i].checked) {
            price += parseInt(checkedCost[i].getAttribute('data-cost'));
         }
+        checkedCost[i].addEventListener('focus', (e) => {
+            e.target.parentElement.classList.add('focus');
+            })
+
+        checkedCost[i].addEventListener('blur', (e) => {
+            e.target.parentElement.classList.remove('focus'); 
+        })
      
         }
         totalCost.innerHTML = `Total: $${price}`; 
     
 }); 
+
+
+
+
 
 /* Payment info Section*/
 
@@ -103,61 +115,74 @@ payment.addEventListener("change", (e) => {
     
     document.querySelector('form').addEventListener('submit', (e) => {
         const isValidUsername = () => /^[a-z]+$/.test(nameInput.value); 
-        const isValidEmail = () => /^[^@] + @ [^@.]+\.[a-z]+$/i.test(emailInput.value); 
-        const isValidccNumber = () => /^4[0-9]{12}(?:[0-9]{3})?$/.test(ccNumber.value); 
+        const isValidEmail = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput.value); 
+        const isValidccNumber = () => /^\d{13,16}$/.test(ccNumber.value); 
         const isValidCvv = () => /^[0-9]{3,4}$/.test(cvv.value); 
         const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
         e.preventDefault();
         //name validator 
 
         if (isValidUsername()) {
-            nameInput.closest('label').nextElementSibling.classList.add = 'valid';
+            nameInput.closest('label').classList.add('valid');
+        
            } else {
             nameInput.closest('label').className = 'name-hint';
+            nameInput.closest('label').classList.remove('valid'); 
+            nameInput.closest('label').classList.add('not-valid'); 
             nameInput.nextElementSibling.style.display = 'block'; 
            } 
 
            //email validator 
            if (isValidEmail()) {
-            emailInput.closest('label').className.add = 'valid'; 
+            emailInput.closest('label').classList.add('valid'); 
            } else {
-            emailInput.closest('label').className = 'email-hint'; 
+            emailInput.closest('label').className = 'email-hint';
+            emailInput.closest('label').classList.remove('valid'); 
+            emailInput.closest('label').classList.add('not-valid'); 
             emailInput.nextElementSibling.style.display = 'block'; 
         }
         //card number validator 
         if (isValidccNumber()) {
-            ccNumber.closest('label').className.replace = 'valid'; 
+            ccNumber.closest('label').classList.add('valid'); 
         } else {
             ccNumber.closest('label').className = 'cc-hint'; 
+            ccNumber.closest('label').classList.remove('valid');
+            ccNumber.closest('label').classList.add('not-valid');
             ccNumber.nextElementSibling.style.display = 'block'; 
         }
         //cvv validator 
         if (isValidCvv()) {
-            cvv.closest('label').className.add = 'valid';
+            cvv.closest('label').classList.add('valid'); 
         } else {
             cvv.closest('label').className = 'cvv-hint'; 
+            cvv.closest('label').classList.remove('valid');
+            cvv.closest('label').classList.add('not-valid');
             cvv.nextElementSibling.style.display = 'block'; 
         }
 
         //zipcode validator
         if (isValidZipCode()) {
-            zipCode.closest('label').className.add = 'valid'; 
+            zipCode.closest('label').classList.add('valid'); 
         } else {
             zipCode.closest('label').className = 'zip-hint'; 
+            zipCode.closest('label').classList.remove('valid');
+            zipCode.closest('label').classList.add('not-valid');
             zipCode.nextElementSibling.style.display = 'block'; 
         }
 
-        //activities validator
-
+        //activities validator 
       
         if (totalCost !== 0) {
-            activities.lastElementChild.classList.add('valid'); 
-            activities.lastElementChild.style.display = 'none'; 
-         } else {
+            activities.closest('fieldset').classList.add('valid'); 
+            } else {
             activities.lastChild.className = 'activities-hint';
-            activities.lastElementChild.classList.add('not-valid'); 
+            activities.closest('fieldset').classList.remove('valid');
+            activities.closest('fieldset').classList.add('not-valid');
             activities.lastElementChild.style.display = 'block';
-            }
+            } 
+            
         
     
-    });  
+    });    
+
+   
