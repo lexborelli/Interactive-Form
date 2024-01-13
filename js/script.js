@@ -52,17 +52,19 @@ jobSelect.addEventListener('change', (e) => {
 });
 
 /*Activities */
-let price = 0;
+
 
 activities.addEventListener('change', (e) => {
-    checkedActivity = e.target;
     let price = 0;
 
     for (let i = 0; i < checkedCost.length; i++) {
 
         if (checkedCost[i].checked) {
            price += parseInt(checkedCost[i].getAttribute('data-cost'));
+        } else {
+            price - parseInt(checkedCost[i].getAttribute('data-cost'));
         }
+
         checkedCost[i].addEventListener('focus', (e) => {
             e.target.parentElement.classList.add('focus');
             })
@@ -70,9 +72,18 @@ activities.addEventListener('change', (e) => {
         checkedCost[i].addEventListener('blur', (e) => {
             e.target.parentElement.classList.remove('focus'); 
         })
-     
+       
         }
         totalCost.innerHTML = `Total: $${price}`; 
+    
+    if (totalCost !== 0 && price !== 0) {
+       activities.closest('fieldset').classList.add('valid'); 
+      } else {
+        activities.lastChild.className = 'activities-hint';
+        activities.closest('fieldset').classList.remove('valid');
+        activities.closest('fieldset').classList.add('not-valid');
+        activities.lastElementChild.style.display = 'block';
+        } 
     
 }); 
 
@@ -112,6 +123,7 @@ payment.addEventListener("change", (e) => {
     const ccNumber = document.querySelector('input[id="cc-num"]');
     const zipCode = document.querySelector('input[id="zip"]');
     const cvv = document.querySelector('input[id="cvv"]');
+
     
     document.querySelector('form').addEventListener('submit', (e) => {
         const isValidUsername = () => /^[a-z]+$/.test(nameInput.value); 
@@ -119,6 +131,7 @@ payment.addEventListener("change", (e) => {
         const isValidccNumber = () => /^\d{13,16}$/.test(ccNumber.value); 
         const isValidCvv = () => /^[0-9]{3,4}$/.test(cvv.value); 
         const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
+
         e.preventDefault();
         //name validator 
 
@@ -171,18 +184,16 @@ payment.addEventListener("change", (e) => {
         }
 
         //activities validator 
-      
-        if (totalCost !== 0) {
+        /*const isValid = activities.querySelectorAll('input[type="checkbox"]').checked;
+         if (isValid  >= 1) {
             activities.closest('fieldset').classList.add('valid'); 
             } else {
-            activities.lastChild.className = 'activities-hint';
-            activities.closest('fieldset').classList.remove('valid');
-            activities.closest('fieldset').classList.add('not-valid');
-            activities.lastElementChild.style.display = 'block';
-            } 
+                activities.lastChild.className = 'activities-hint';
+                activities.closest('fieldset').classList.remove('valid');
+                activities.closest('fieldset').classList.add('not-valid');
+                activities.lastElementChild.style.display = 'block';
             
-        
-    
+        }*/
     });    
 
    
