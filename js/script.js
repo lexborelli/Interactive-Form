@@ -184,16 +184,8 @@ payment.addEventListener("change", (e) => {
         }
 
         //activities validator 
-        /*const isValid = activities.querySelectorAll('input[type="checkbox"]').checked;
-         if (isValid  >= 1) {
-            activities.closest('fieldset').classList.add('valid'); 
-            } else {
-                activities.lastChild.className = 'activities-hint';
-                activities.closest('fieldset').classList.remove('valid');
-                activities.closest('fieldset').classList.add('not-valid');
-                activities.lastElementChild.style.display = 'block';
-            
-        }*/
+        const activitySelected = activities.querySelector('input[type="checkbox"]:checked');
+        activities.className = `activities ${activitySelected ? 'valid' : 'not-valid'}`;
     });    
 
    
