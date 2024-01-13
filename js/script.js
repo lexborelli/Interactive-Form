@@ -29,15 +29,20 @@ jobSelect.addEventListener('change', (e) => {
             jobOptions.disabled = false; 
         } else {
         jobOptions.disabled = true;
+        jobOptions.hidden = true; 
     }
 });
 
-/* T-shirt Info--- */
+/* T-shirt Info--- targeted the shirt colors id to hide the the dropdown color menu. Upon clicking the design drop down menu the color selection becomes visible. When selecting the design, the forloop in the eventlisteners loops through the colors and targets the data-theme attributes under the same data theme. Either Js-puns or  "i love js". Once selected the opposite data-theme becomes disable and hidden.   */
 
-    shirtColor.hidden = true; 
+
+
+    shirtColor.disabled = true; 
+    shirtColor.hidden = true;
+
 
     design.addEventListener('click', (e) => {   
-        shirtColor.hidden = false;
+        
 
         for(let i = 0; i < colorSelect.length; i++) {
 
@@ -45,13 +50,17 @@ jobSelect.addEventListener('change', (e) => {
            colorSelect[i].hidden = true; 
            colorSelect[i].disabled = true;
             } else {
+                shirtColor.hidden = false; 
                 colorSelect[i].hidden = false; 
                 colorSelect[i].disabled = false; 
             }
          }
 });
 
-/*Activities */
+/*Activities Added an event listener to the "Register for Activities" fieldset Id element to listen for changes. If an activity is checked, the total cost should increase by the value in the data-cost attribute of the activity’s <input type="checkbox"> element.
+If an activity is unchecked, the total cost should decrease by that amount. The checked an uncheck checkbox show display the correct data-cost price in the p element with the id "activities-cost".Programmed all the activity section checkbox input elements to listen
+for focus and blur elements.When the blur event is detected, remove the .focus class from the label element that possesses it. It can be helpful here to directly target the element with the className of .focus in order to remove it. created an if statement that targets the input type ='checkbox' element for changes if an element was selected and the price is not equal to & the totalCost(p element with #activities-cost) is the valid class is added. 
+if selected then unselected the valid class is removed and the not valid class is displayed with the activities-hint, which asks user to select at leasst one activity.  */
 
 
 activities.addEventListener('change', (e) => {
@@ -91,7 +100,9 @@ activities.addEventListener('change', (e) => {
 
 
 
-/* Payment info Section*/
+/* Payment info Section defaulted the credit card payment to be visible as a form of payment. 
+Until, paypal or bitcoin is selected. Created an event listener to listen for changes in the payment drop down menu and desplay the form of payment that was selected and 
+hide the payments that were not selected. */
 
 
 creditCard.selected = true;  
@@ -129,7 +140,7 @@ payment.addEventListener("change", (e) => {
         const isValidUsername = () => /^[a-z]+$/.test(nameInput.value); 
         const isValidEmail = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput.value); 
         const isValidccNumber = () => /^\d{13,16}$/.test(ccNumber.value); 
-        const isValidCvv = () => /^[0-9]{3,4}$/.test(cvv.value); 
+        const isValidCvv = () => /^[0-9]{3}$/.test(cvv.value); 
         const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
 
         e.preventDefault();
