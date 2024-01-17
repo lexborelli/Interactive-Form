@@ -1,7 +1,7 @@
 const nameInput = document.querySelector('input[type="text"]'); 
 const jobOptions = document.querySelector('#other-job-role');
 const jobSelect = document.querySelector('#title'); 
-const shirtColor = document.querySelector('#shirt-colors'); 
+const shirtColor = document.querySelector('#color'); 
 const colorSelect = document.querySelectorAll('option[data-theme]');
 const design = document.querySelector('#design'); 
 const activities = document.querySelector('#activities');
@@ -38,19 +38,17 @@ jobSelect.addEventListener('change', (e) => {
 
 
     shirtColor.disabled = true; 
-    shirtColor.hidden = true;
 
 
     design.addEventListener('click', (e) => {   
-        
+        shirtColor.disabled = false; 
 
-        for(let i = 0; i < colorSelect.length; i++) {
+        for (let i = 0; i < colorSelect.length; i++) {
 
         if (e.target.value !== colorSelect[i].getAttribute("data-theme")) {
            colorSelect[i].hidden = true; 
            colorSelect[i].disabled = true;
             } else {
-                shirtColor.hidden = false; 
                 colorSelect[i].hidden = false; 
                 colorSelect[i].disabled = false; 
             }
@@ -62,6 +60,15 @@ If an activity is unchecked, the total cost should decrease by that amount. The 
 for focus and blur elements.When the blur event is detected, remove the .focus class from the label element that possesses it. It can be helpful here to directly target the element with the className of .focus in order to remove it. created an if statement that targets the input type ='checkbox' element for changes if an element was selected and the price is not equal to & the totalCost(p element with #activities-cost) is the valid class is added. 
 if selected then unselected the valid class is removed and the not valid class is displayed with the activities-hint, which asks user to select at leasst one activity.  */
 
+for (let i = 0; i < checkedCost.length; i++) {
+    checkedCost[i].addEventListener('focus', (e) => {
+        e.target.parentElement.classList.add('focus');
+        });
+
+    checkedCost[i].addEventListener('blur', (e) => {
+        e.target.parentElement.classList.remove('focus'); 
+    });
+};
 
 activities.addEventListener('change', (e) => {
     let price = 0;
@@ -73,14 +80,6 @@ activities.addEventListener('change', (e) => {
         } else {
             price - parseInt(checkedCost[i].getAttribute('data-cost'));
         }
-
-        checkedCost[i].addEventListener('focus', (e) => {
-            e.target.parentElement.classList.add('focus');
-            })
-
-        checkedCost[i].addEventListener('blur', (e) => {
-            e.target.parentElement.classList.remove('focus'); 
-        })
        
         }
         totalCost.innerHTML = `Total: $${price}`; 
