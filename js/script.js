@@ -246,20 +246,20 @@ payment.addEventListener("change", (e) => {
 
         //zipcode validator
         if (zipCode.value === '') {
-            zipcode.closest('label').classList.add('name-hint');
-            zipcode.closest('label').classList.remove('valid'); 
-            zipcode.closest('label').classList.add('not-valid'); 
-            zipcode.nextElementSibling.style.display = 'block';
+            zipCode.closest('label').classList.add('name-hint');
+            zipCode.closest('label').classList.remove('valid'); 
+            zipCode.closest('label').classList.add('not-valid'); 
+            zipCode.nextElementSibling.style.display = 'block';
         } else if (!isValidZipCode()) {
-            zipcode.closest('label').classList.add('name-hint');
-            zipcode.closest('label').classList.remove('valid'); 
-            zipcode.closest('label').classList.add('not-valid'); 
-            zipcode.nextElementSibling.style.display = 'block';
+            zipCode.closest('label').classList.add('name-hint');
+            zipCode.closest('label').classList.remove('valid'); 
+            zipCode.closest('label').classList.add('not-valid'); 
+            zipCode.nextElementSibling.style.display = 'block';
         } else {
-            zipcode.closest('label').classList.remove('name-hint');
-            zipcode.closest('label').classList.remove('not-valid'); 
-            zipcode.closest('label').classList.add('valid');
-            zipcode.nextElementSibling.style.display = 'none';  
+            zipCode.closest('label').classList.remove('name-hint');
+            zipCode.closest('label').classList.remove('not-valid'); 
+            zipCode.closest('label').classList.add('valid');
+            zipCode.nextElementSibling.style.display = 'none';  
         }
     };
 
