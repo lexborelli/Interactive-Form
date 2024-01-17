@@ -140,6 +140,7 @@ payment.addEventListener("change", (e) => {
     const isValidCvv = () => /^[0-9]{3}$/.test(cvv.value); 
     const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
     
+    /* added a prevalidation upon typing in input element to tell user if valid in realtime*/
   
     nameInput.addEventListener('keyup', () => {
         validateInputs(); 
