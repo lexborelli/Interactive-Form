@@ -40,7 +40,7 @@ jobSelect.addEventListener('change', (e) => {
     shirtColor.disabled = true; 
 
 
-    design.addEventListener('click', (e) => {   
+    design.addEventListener('change', (e) => {   
         shirtColor.disabled = false; 
 
         for (let i = 0; i < colorSelect.length; i++) {
@@ -80,7 +80,6 @@ activities.addEventListener('change', (e) => {
         } else {
             price - parseInt(checkedCost[i].getAttribute('data-cost'));
         }
-       
         }
         totalCost.innerHTML = `Total: $${price}`; 
     
@@ -260,6 +259,7 @@ payment.addEventListener("change", (e) => {
             zipCode.closest('label').classList.add('valid');
             zipCode.nextElementSibling.style.display = 'none';  
         }
+
     };
 
 
@@ -268,10 +268,11 @@ payment.addEventListener("change", (e) => {
 
     document.querySelector('form').addEventListener('submit', (e) => {
       
-
-        e.preventDefault();
-
-        validateInputs(); 
+        if (!validateInputs()) {
+            e.preventDefault();
+        } else {
+            validateInputs();
+        }
 
         //activities validator 
         const activitySelected = activities.querySelector('input[type="checkbox"]:checked');
