@@ -134,69 +134,149 @@ payment.addEventListener("change", (e) => {
     const ccNumber = document.querySelector('input[id="cc-num"]');
     const zipCode = document.querySelector('input[id="zip"]');
     const cvv = document.querySelector('input[id="cvv"]');
-
+    const isValidUsername = () => /^[a-z]+$/.test(nameInput.value); 
+    const isValidEmail = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput.value); 
+    const isValidccNumber = () => /^\d{13,16}$/.test(ccNumber.value); 
+    const isValidCvv = () => /^[0-9]{3}$/.test(cvv.value); 
+    const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
     
-    document.querySelector('form').addEventListener('submit', (e) => {
-        const isValidUsername = () => /^[a-z]+$/.test(nameInput.value); 
-        const isValidEmail = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput.value); 
-        const isValidccNumber = () => /^\d{13,16}$/.test(ccNumber.value); 
-        const isValidCvv = () => /^[0-9]{3}$/.test(cvv.value); 
-        const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
+  
+    nameInput.addEventListener('keyup', () => {
+        validateInputs(); 
+    });
+    
+    emailInput.addEventListener('keyup', () => {
+        validateInputs();
+    }); 
 
-        e.preventDefault();
-        //name validator 
+    ccNumber.addEventListener('keyup', () => {
+        validateInputs();
+    });
 
-        if (isValidUsername()) {
-            nameInput.closest('label').classList.add('valid');
-        
-           } else {
-            nameInput.closest('label').className = 'name-hint';
+    cvv.addEventListener('keyup', () => {
+        validateInputs();
+    });
+
+    zipCode.addEventListener('keyup', () => {
+        validateInputs();
+    });
+    
+    const validateInputs = () => {
+
+         //name validator 
+
+
+        if (nameInput.value === '') {
+            nameInput.closest('label').classList.add('name-hint');
             nameInput.closest('label').classList.remove('valid'); 
             nameInput.closest('label').classList.add('not-valid'); 
             nameInput.nextElementSibling.style.display = 'block'; 
-           } 
+        } else if (!isValidUsername()) {
+            nameInput.closest('label').classList.add('name-hint');
+            nameInput.closest('label').classList.remove('valid'); 
+            nameInput.closest('label').classList.add('not-valid'); 
+            nameInput.nextElementSibling.style.display = 'block'; 
+        } else {
+            nameInput.closest('label').classList.remove('name-hint');
+            nameInput.closest('label').classList.remove('not-valid'); 
+            nameInput.closest('label').classList.add('valid');
+            nameInput.nextElementSibling.style.display = 'none'; 
+        }
 
-           //email validator 
-           if (isValidEmail()) {
-            emailInput.closest('label').classList.add('valid'); 
-           } else {
-            emailInput.closest('label').className = 'email-hint';
+         //email validator 
+
+
+        if (emailInput.value === '') {
+            emailInput.closest('label').classList.add('name-hint');
             emailInput.closest('label').classList.remove('valid'); 
             emailInput.closest('label').classList.add('not-valid'); 
-            emailInput.nextElementSibling.style.display = 'block'; 
-        }
-        //card number validator 
-        if (isValidccNumber()) {
-            ccNumber.closest('label').classList.add('valid'); 
+            emailInput.nextElementSibling.style.display = 'block';
+        } else if (!isValidEmail()) {
+            emailInput.closest('label').classList.add('name-hint');
+            emailInput.closest('label').classList.remove('valid'); 
+            emailInput.closest('label').classList.add('not-valid'); 
+            emailInput.nextElementSibling.style.display = 'block';
         } else {
-            ccNumber.closest('label').className = 'cc-hint'; 
-            ccNumber.closest('label').classList.remove('valid');
-            ccNumber.closest('label').classList.add('not-valid');
-            ccNumber.nextElementSibling.style.display = 'block'; 
+            emailInput.closest('label').classList.remove('name-hint');
+            emailInput.closest('label').classList.remove('not-valid'); 
+            emailInput.closest('label').classList.add('valid');
+            emailInput.nextElementSibling.style.display = 'none';  
         }
-        //cvv validator 
-        if (isValidCvv()) {
-            cvv.closest('label').classList.add('valid'); 
+        
+        //credit card number validator 
+
+
+        if (ccNumber.value === '') {
+            ccNumber.closest('label').classList.add('name-hint');
+            ccNumber.closest('label').classList.remove('valid'); 
+            ccNumber.closest('label').classList.add('not-valid'); 
+            ccNumber.nextElementSibling.style.display = 'block';
+        } else if (!isValidccNumber()) {
+            ccNumber.closest('label').classList.add('name-hint');
+            ccNumber.closest('label').classList.remove('valid'); 
+            ccNumber.closest('label').classList.add('not-valid'); 
+            ccNumber.nextElementSibling.style.display = 'block';
         } else {
-            cvv.closest('label').className = 'cvv-hint'; 
-            cvv.closest('label').classList.remove('valid');
-            cvv.closest('label').classList.add('not-valid');
-            cvv.nextElementSibling.style.display = 'block'; 
+            ccNumber.closest('label').classList.remove('name-hint');
+            ccNumber.closest('label').classList.remove('not-valid'); 
+            ccNumber.closest('label').classList.add('valid');
+            ccNumber.nextElementSibling.style.display = 'none';  
+        }
+
+         //cvv validator 
+
+
+        if (cvv.value === '') {
+            cvv.closest('label').classList.add('name-hint');
+            cvv.closest('label').classList.remove('valid'); 
+            cvv.closest('label').classList.add('not-valid'); 
+            cvv.nextElementSibling.style.display = 'block';
+        } else if (!isValidCvv()) {
+            cvv.closest('label').classList.add('name-hint');
+            cvv.closest('label').classList.remove('valid'); 
+            cvv.closest('label').classList.add('not-valid'); 
+            cvv.nextElementSibling.style.display = 'block';
+        } else {
+            cvv.closest('label').classList.remove('name-hint');
+            cvv.closest('label').classList.remove('not-valid'); 
+            cvv.closest('label').classList.add('valid');
+            cvv.nextElementSibling.style.display = 'none';  
         }
 
         //zipcode validator
-        if (isValidZipCode()) {
-            zipCode.closest('label').classList.add('valid'); 
+        if (zipCode.value === '') {
+            zipcode.closest('label').classList.add('name-hint');
+            zipcode.closest('label').classList.remove('valid'); 
+            zipcode.closest('label').classList.add('not-valid'); 
+            zipcode.nextElementSibling.style.display = 'block';
+        } else if (!isValidZipCode()) {
+            zipcode.closest('label').classList.add('name-hint');
+            zipcode.closest('label').classList.remove('valid'); 
+            zipcode.closest('label').classList.add('not-valid'); 
+            zipcode.nextElementSibling.style.display = 'block';
         } else {
-            zipCode.closest('label').className = 'zip-hint'; 
-            zipCode.closest('label').classList.remove('valid');
-            zipCode.closest('label').classList.add('not-valid');
-            zipCode.nextElementSibling.style.display = 'block'; 
+            zipcode.closest('label').classList.remove('name-hint');
+            zipcode.closest('label').classList.remove('not-valid'); 
+            zipcode.closest('label').classList.add('valid');
+            zipcode.nextElementSibling.style.display = 'none';  
         }
+    };
+
+
+
+    
+
+    document.querySelector('form').addEventListener('submit', (e) => {
+      
+
+        e.preventDefault();
+
+        validateInputs(); 
 
         //activities validator 
         const activitySelected = activities.querySelector('input[type="checkbox"]:checked');
         activities.className = `activities ${activitySelected ? 'valid' : 'not-valid'}`;
+        
     });    
 
    
