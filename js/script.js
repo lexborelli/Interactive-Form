@@ -46,6 +46,8 @@ jobSelect.addEventListener('change', (e) => {
         for (let i = 0; i < colorSelect.length; i++) {
 
         if (e.target.value !== colorSelect[i].getAttribute("data-theme")) {
+           const option = document.querySelector(`[data-theme = "${e.target.value}"]`);
+           option.selected = true; 
            colorSelect[i].hidden = true; 
            colorSelect[i].disabled = true;
             } else {
@@ -68,6 +70,7 @@ for (let i = 0; i < checkedCost.length; i++) {
     checkedCost[i].addEventListener('blur', (e) => {
         e.target.parentElement.classList.remove('focus'); 
     });
+
 };
 
 activities.addEventListener('change', (e) => {
@@ -277,7 +280,10 @@ payment.addEventListener("change", (e) => {
         //activities validator 
         const activitySelected = activities.querySelector('input[type="checkbox"]:checked');
         activities.className = `activities ${activitySelected ? 'valid' : 'not-valid'}`;
-        
+        if (activitySelected) {
+            activities.lastChild.removeChild;
+        }
+
     });    
 
    
