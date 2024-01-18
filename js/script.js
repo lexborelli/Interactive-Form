@@ -139,7 +139,7 @@ payment.addEventListener("change", (e) => {
     const ccNumber = document.querySelector('input[id="cc-num"]');
     const zipCode = document.querySelector('input[id="zip"]');
     const cvv = document.querySelector('input[id="cvv"]');
-    const isValidUsername = () => /^[a-z]+$/.test(nameInput.value); 
+    const isValidUsername = () => /^[A-Za-z.\s_-]+$/.test(nameInput.value); 
     const isValidEmail = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailInput.value); 
     const isValidccNumber = () => /^\d{13,16}$/.test(ccNumber.value); 
     const isValidCvv = () => /^[0-9]{3}$/.test(cvv.value); 
@@ -284,13 +284,9 @@ payment.addEventListener("change", (e) => {
 
     document.querySelector('form').addEventListener('submit', (e) => {
       
-        if (!validateInputs()) {
-            e.preventDefault();
-        } else {
-            validateInputs();
-        }
+        e.preventDefault();
+        validateInputs() && window.location.reload();
 
-        
        
     });    
 
