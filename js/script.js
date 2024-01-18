@@ -87,12 +87,16 @@ activities.addEventListener('change', (e) => {
         totalCost.innerHTML = `Total: $${price}`; 
     
     if (totalCost !== 0 && price !== 0) {
-       activities.closest('fieldset').classList.add('valid'); 
+       activities.closest('fieldset').classList.add('valid');
+       activities.closest('fieldset').classList.remove('not-valid');
+       activities.lastElementChild.style.display = 'none';
+       activities.classList.remove('activities-hint');
       } else {
-        activities.lastChild.className = 'activities-hint';
         activities.closest('fieldset').classList.remove('valid');
         activities.closest('fieldset').classList.add('not-valid');
         activities.lastElementChild.style.display = 'block';
+        activities.classList.add('activities-hint');
+
         } 
     
 }); 
@@ -140,7 +144,7 @@ payment.addEventListener("change", (e) => {
     const isValidccNumber = () => /^\d{13,16}$/.test(ccNumber.value); 
     const isValidCvv = () => /^[0-9]{3}$/.test(cvv.value); 
     const isValidZipCode = () => /^[0-9]{5}$/.test(zipCode.value);
-    
+
     /* added a prevalidation upon typing in input element to tell user if valid in realtime*/
   
     nameInput.addEventListener('keyup', () => {
@@ -163,6 +167,10 @@ payment.addEventListener("change", (e) => {
         validateInputs();
     });
     
+    activities.addEventListener('keyup', () => {
+        validateInputs();
+    });
+
     const validateInputs = () => {
 
          //name validator 
@@ -263,6 +271,11 @@ payment.addEventListener("change", (e) => {
             zipCode.nextElementSibling.style.display = 'none';  
         }
 
+        //activities validator 
+
+        const activitySelected = activities.querySelector('input[type="checkbox"]:checked');
+        activities.className = `activities ${activitySelected ? 'valid' : 'not-valid'}`;
+
     };
 
 
@@ -277,13 +290,8 @@ payment.addEventListener("change", (e) => {
             validateInputs();
         }
 
-        //activities validator 
-        const activitySelected = activities.querySelector('input[type="checkbox"]:checked');
-        activities.className = `activities ${activitySelected ? 'valid' : 'not-valid'}`;
-        if (activitySelected) {
-            activities.lastChild.removeChild;
-        }
-
+        
+       
     });    
 
    
