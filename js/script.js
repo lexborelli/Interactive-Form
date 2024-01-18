@@ -210,7 +210,7 @@ payment.addEventListener("change", (e) => {
             emailInput.closest('label').classList.remove('name-hint');
             emailInput.closest('label').classList.remove('not-valid'); 
             emailInput.closest('label').classList.add('valid');
-            emailInput.nextElementSibling.style.display = 'none';  
+            emailInput.nextElementSibling.style.display = 'none'; 
         }
         
         //credit card number validator 
@@ -284,9 +284,13 @@ payment.addEventListener("change", (e) => {
 
     document.querySelector('form').addEventListener('submit', (e) => {
       
-        e.preventDefault();
-        validateInputs() && window.location.reload();
+        if (!isValidUsername || !isValidCvv || !isValidEmail || !isValidZipCode || !isValidccNumber) {
+            e.preventDefault();
+        } else {
+           window.location.reload();
+        }
 
+        
        
     });    
 
