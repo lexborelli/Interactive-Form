@@ -286,9 +286,7 @@ payment.addEventListener("change", (e) => {
       
         if (!isValidUsername || !isValidCvv || !isValidEmail || !isValidZipCode || !isValidccNumber) {
             e.preventDefault();
-        } else {
-           window.location.reload();
-        }
+        } ;
 
         
        
