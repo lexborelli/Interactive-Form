@@ -73,8 +73,8 @@ for (let i = 0; i < checkedCost.length; i++) {
 
 };
 
+let price = 0;
 activities.addEventListener('change', (e) => {
-    let price = 0;
 
     for (let i = 0; i < checkedCost.length; i++) {
 
@@ -86,18 +86,6 @@ activities.addEventListener('change', (e) => {
         }
         totalCost.innerHTML = `Total: $${price}`; 
     
-    if (totalCost !== 0 && price !== 0) {
-       activities.closest('fieldset').classList.add('valid');
-       activities.closest('fieldset').classList.remove('not-valid');
-       activities.lastElementChild.style.display = 'none';
-       activities.classList.remove('activities-hint');
-      } else {
-        activities.closest('fieldset').classList.remove('valid');
-        activities.closest('fieldset').classList.add('not-valid');
-        activities.lastElementChild.style.display = 'block';
-        activities.classList.add('activities-hint');
-
-        } 
     
 }); 
 
@@ -133,7 +121,7 @@ payment.addEventListener("change", (e) => {
         }
     });
 
-    /*form validation*/
+    /*form validation accessed the */
 
     const emailInput = document.querySelector('input[type="email"]');
     const ccNumber = document.querySelector('input[id="cc-num"]');
@@ -273,8 +261,18 @@ payment.addEventListener("change", (e) => {
 
         //activities validator 
 
-        const activitySelected = activities.querySelector('input[type="checkbox"]:checked');
-        activities.className = `activities ${activitySelected ? 'valid' : 'not-valid'}`;
+        if (price !== 0) {
+            activities.closest('fieldset').classList.add('valid');
+            activities.closest('fieldset').classList.remove('not-valid');
+            activities.lastElementChild.style.display = 'none';
+            activities.classList.remove('activities-hint');
+           } else {
+             activities.closest('fieldset').classList.remove('valid');
+             activities.closest('fieldset').classList.add('not-valid');
+             activities.lastElementChild.style.display = 'block';
+             activities.classList.add('activities-hint');
+     
+             } 
 
     };
 
@@ -283,13 +281,16 @@ payment.addEventListener("change", (e) => {
     
 
     document.querySelector('form').addEventListener('submit', (e) => {
-      
-        if (!isValidUsername || !isValidCvv || !isValidEmail || !isValidZipCode || !isValidccNumber) {
+        validateInputs();
+    
+        if (payment.value === 'credit-card') {
+            if (!isValidCvv() || !isValidccNumber() || !isValidZipCode()) {
+                e.preventDefault();
+            } 
+        } 
+        if (!isValidUsername() || !isValidEmail() || price === 0) {
             e.preventDefault();
-        } ;
-
-        
-       
+        } 
     });    
 
    
