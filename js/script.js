@@ -121,7 +121,9 @@ payment.addEventListener("change", (e) => {
         }
     });
 
-    /*form validation accessed the */
+    /*form validation accessed the name input text field variable I creatd, created a variable for the email input, credit card number input, cvv input, and zipcode input. Then created a regex. In the usernameInput it test the value of the name Input for uppercase and lowercase letters,
+    the email function test the email input for letters, an "@" symbol and a "."com. The credit card number function looks for the credit card input value to have 13-16 number in the input. Then the zipcode function looks for the values enetered in the input to be 5 digits.
+    Lastly, the cvv function test the cvv input to have 3 digits entered im the input element.  */
 
     const emailInput = document.querySelector('input[type="email"]');
     const ccNumber = document.querySelector('input[id="cc-num"]');
@@ -158,6 +160,9 @@ payment.addEventListener("change", (e) => {
     activities.addEventListener('keyup', () => {
         validateInputs();
     });
+
+    /*The Validate input function is a boolean with multiple if statements to test if the input text fields are empty (if yes, then it puts the hint which tells the user what to enter to make the text field validate, block border in red, and a not valid caution sign), then if the value enter in the input text field does not pass the given text fields test; such as the cc number needing to be 13-16 numbers (if no, then it puts the hint which tells the user what to enter to make the text field validate, block border in red, and a not valid caution sign), else if everything is entered correctly then a check mark symbol is added and the field is validated.
+    The activity if statement checks to make sure the price value is not equal to zero. If the price is not equal to zero then that means an activity was selected.  */
 
     const validateInputs = () => {
 
@@ -277,6 +282,7 @@ payment.addEventListener("change", (e) => {
     };
 
 
+    /* The form event listener listens for the submit event, before the form can be submitted the validateInputs function must be true and all the input values must be successfully validated. It checks if the credit card is selected then the corect input text fields are successfully entered correctly but if not the form is not alllowed to submit. However, if  the username input and email input is not successfully entered and the price is not equal to zero then the form is prevented from submitting.  */
 
     
 
